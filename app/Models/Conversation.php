@@ -26,4 +26,15 @@ class Conversation extends Model
             return User::firstWhere('id', $this->sender_id);
         }
     }
+    public function isLastMessageRead(){
+        $user = auth()->id();
+        $lastMessage = $this->messages()->latest()->first();
+        if ($lastMessage) {
+            return $lastMessage->read_at !== null && $lastMessage->sender_id == $user;
+        }
+    }
+    public function unreadMessagesCount(){
+        return $unreadMessages = Message::where('conversation_id', $this->id)->where('receiver_id',auth()->id())->whereNull('read_at')->count();
+
+    }
 }

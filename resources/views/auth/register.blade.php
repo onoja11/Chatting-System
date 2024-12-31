@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
 
         <!-- Name -->
@@ -15,6 +15,48 @@
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
+
+        <!-- Department -->
+        <div class="mt-4">
+            <x-input-label for="department" :value="__('Department')" />
+            
+            <x-text-input id="department" class="block mt-1 w-full"
+            type="text"
+            name="department" />
+            <x-input-error :messages="$errors->get('department')" class="mt-2" />
+            </div>
+
+        <!-- University id -->
+        <div class="mt-4">
+            <x-input-label for="university_id" :value="__('University Id Number')" />
+            
+            <x-text-input id="university_id" class="block mt-1 w-full"
+            type="text"
+            name="university_id" />
+            <x-input-error :messages="$errors->get('university_id')" class="mt-2" />
+            </div>
+
+             <!-- level -->
+        <div class="mt-4">
+            <x-input-label for="level" :value="__('Level')" />
+            
+            <x-text-input id="level" class="block mt-1 w-full"
+            type="number"
+            name="level" />
+            <x-input-error :messages="$errors->get('level')" class="mt-2" />
+            </div>
+
+            <!-- Profile pic -->
+            <div class="mt-4">
+                <x-input-label for="profile_pic" :value="__('Profile pic')" />
+    
+                <x-text-input id="profile_pic" class="block mt-1 w-full"
+                                type="file"
+                                name="profile_pic"
+                                 accept="image/*"  />
+    
+                <x-input-error :messages="$errors->get('profile_pic')" class="mt-2" />
+            </div>
 
         <!-- Password -->
         <div class="mt-4">
@@ -46,6 +88,7 @@
 
             <x-primary-button class="ms-4">
                 {{ __('Register') }}
+                
             </x-primary-button>
         </div>
     </form>

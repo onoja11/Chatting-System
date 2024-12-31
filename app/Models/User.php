@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profilePic',
+        'university_id_number',
+        'department',
+        'level'
     ];
 
     /**
@@ -50,5 +54,7 @@ class User extends Authenticatable
         return $this->hasMany(Conversation::class,'sender_id')->orWhere('receiver_id',$this->id);
                     // ->whereNotDeleted(); // Ensure this is a valid scope
     }
+
+   
 
 }

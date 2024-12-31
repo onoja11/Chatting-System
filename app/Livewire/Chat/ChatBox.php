@@ -14,6 +14,13 @@ class ChatBox extends Component
     public $name;
     public $body;
     public $loadedMessages;
+    public $paginate_var = 10;
+    
+
+
+    protected $listeners = [
+    'loadMore' => 'loadMore' // Ensure it explicitly maps to the method
+];
 
     public function mount()
     {
@@ -28,8 +35,21 @@ class ChatBox extends Component
         // $this->name = Conversation::all();
     }
 
+    public function loadMore(){
+        $this->paginate_var+=10;
+        dd("detected");
+
+        $this->loadedMessages();    
+    }
+
     public function loadedMessages(){
-        $this->loadedMessages=Message::where('conversation_id',$this->selectedConversation->id)->get();
+        $count=Message::where('conversation_id',$this->selectedConversation->id)->count();
+        $this->loadedMessages=Message::where('conversation_id',$this->selectedConversation->id)
+        ->skip(max(0, $count - $this->paginate_var))
+        ->take($this->paginate_var)
+        ->get();
+
+        return $this->loadedMessages;
     }
     public function sendMessage(){
         $this->validate(['body'=>'required|string']);
@@ -41,6 +61,12 @@ class ChatBox extends Component
         ]);
         $this->body = ' ';
         $this->loadedMessages->push($createMessage);
+
+
+        $this->selectedConversation->updated_at= now();
+        $this->selectedConversation->save();
+
+        // $this->emitTo('chat.chat-list', 'refresh');
     }
 
     public function render()

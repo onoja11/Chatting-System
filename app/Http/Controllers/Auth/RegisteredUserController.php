@@ -33,12 +33,29 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'profile_pic' => 'image|mimes:png,jpg,jpeg|max:1024',
+            'department' => ['required', 'string', 'max:255'],
+            'level' => ['required', 'numeric', 'max:255'],
+            'university_id' => ['required', 'string', 'max:255', 'unique:users,university_id_number']
         ]);
-
+        if ($request->profile_pic !==null) {
+            $profilePic = $request->file('profile_pic');
+            $profileExt = $profilePic->extension();
+            $profileName = 'profile_pic' . time()  . mt_srand() . "." . $profileExt;
+            $profilePic->move('profile_pic/', $profileName);
+        }
+        else{
+            $profileName = $request->profile_pic;
+        }
+        
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'level' => $request->level,
+            'profilePic' => $profileName !== '' ? $profileName : "" ,
+            'department' => $request->department,
+            'university_id_number' => $request->university_id
         ]);
 
         event(new Registered($user));

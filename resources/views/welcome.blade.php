@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -173,4 +173,51 @@
             </div>
         </div>
     </body>
+</html> --}}
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>{{ config('app.name', 'Laravel') }}</title>
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+            @livewireStyles
+    </head>
+    <body class="font-sans antialiased dark:bg-gray-900" >
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+
+            {{-- <body class="min-h-screen bg-[url('/static/imge/karsten-winegeart-eXFG9dM_1f8-unsplash.jpg')] bg-no-repeat bg-cover bg-center p-4 sm:p-6 md:p-8 overflow-hidden flex items-center justify-center"> --}}
+                <section class="w-full max-w-4xl shadow-lg mx-auto text-center bg-white  p-8 rounded-lg border border-white border-opacity-20">
+                    {{-- <img class="h-9 inline" src="{% static 'image/Veritas-University-removebg-preview.png' %}" alt=""> --}}
+                    <x-application-logo class="w-20 h-25  fill-current inline text-gray-500" />
+
+                    <h2 class="text-gray-800 text-2xl sm:text-3xl md:text-4xl   font-semibold font-serif ">Welcome To</h2>
+            
+                    <h1 class="text-gray-800 text-4xl sm:text-5xl md:text-2xl font-bold mt-2 sm:mt-3 md:mt-4 mb-6 sm:mb-8 md:mb-10 font-serif"> Veritas Classmeet</h1><!--Add vuna logo and reduce font size-->
+                    
+                    <div class="flex flex-row sm:flex-row justify-center p-5 gap-4 sm:gap-6 md:gap-8 pt-3">
+                        <a href="{{route('login')}}" class="w-full sm:w-auto bg-gray-800  md:w-64 p-2 px-8 sm:p-3 rounded-lg text-white font-bold text-sm sm:text-base md:text-lg hover:bg-gray-700  focus:outline-none focus:ring-2 focus:ring-indigo-500    transition duration-300 ease-in-out">
+                            <i class="fas fa-graduation-cap text-white"></i> Login
+                        </a>
+                        {{-- <a href="#" class="w-full sm:w-auto bg-gray-500/80 w-full sm:w-48 md:w-64 p-2 px-8 sm:p-3 rounded-lg text-white font-bold text-sm sm:text-base md:text-lg hover:bg-blue-500/80 transition duration-300 ease-in-out">
+                            <i class="fas fa-chalkboard-teacher"></i> Staff
+                        </a> --}}
+                        <a href="{{route('register')}}" class="w-full bg-gray-500/80 w-full sm:w-48 md:w-64 p-2 px-8 sm:p-3 rounded-lg text-white font-bold text-sm sm:text-base md:text-lg hover:bg-gray-400  focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300 ease-in-out sm:w-auto sm:col-span-2">
+                            <i class="fas fa-user-shield"></i> Register
+                        </a>
+                    </div>
+                </section>
+            
+        </div>
+        @livewireScripts
+    </body>
 </html>
+

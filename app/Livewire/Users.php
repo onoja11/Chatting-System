@@ -37,7 +37,7 @@ class Users extends Component
 
     public function render()
     {
-        $users = User::where('id', '!=', auth()->id())->get();
+        $users = User::where('id', '!=', auth()->id())->where('level',Auth::user()->level)->where('department',Auth::user()->department)->get();
         return view('livewire.users', compact('users'))->layout('layouts.app');
     }
 }

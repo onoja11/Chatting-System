@@ -20,3 +20,6 @@ yarn-error.log
 /.idea
 /.vscode
 /.zed
+/public/profile_pic
+/storage/app/public/images
+/storage/app/public/uploads

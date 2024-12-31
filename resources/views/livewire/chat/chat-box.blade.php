@@ -33,16 +33,31 @@
 
                 {{-- avatar --}}
                 <div class="shrink-0">
-                    <x-avatar class="h-9 w-9 lg:w-11 lg:h-11" />
+                    @if ($selectedConversation->getReceiver()->profilePic == "")
+                    <x-avatar class="h-9 w-9 lg:w-11 lg:h-11"/>
+                    @else
+                    <x-avatar class="h-9 w-9 lg:w-11 lg:h-11" src="{{ asset('profile_pic/' .  $selectedConversation->getReceiver()->profilePic ) }}" />
+                    @endif
+                    {{-- <x-avatar  src="{{ asset('profile_pic/' .  ) }}" /> --}}
                 </div>
-                <h6 class="font-bold truncate">
-                    {{ $selectedConversation ? $selectedConversation->getReceiver()->name : 'Select a conversation' }}
+                <h6 class="font-bold truncate mt-3 ">
+                    {{  $selectedConversation->getReceiver()->name  }}
                 </h6>
             </div>
         </header>
 
         {{-- body --}}
         <main
+        {{-- @scroll="
+        scropTop = $el.scrollTop;
+  
+        if(scropTop <= 0){
+  
+          window.livewire.emit('loadMore');
+  
+        }
+       
+       " --}}
             id="conversation"
             class="flex flex-col gap-3 p-2.5 overflow-y-auto flex-grow overscroll-contain overflow-x-hidden w-full my-auto"
         >
@@ -54,9 +69,9 @@
                     ])>
                         {{-- avatar --}}
                        
-                        <div @class(['shrink-0', 'hidden ' => $message->sender_id === auth()->id()])>
+                        {{-- <div @class(['shrink-0', 'hidden ' => $message->sender_id === auth()->id()])>
                             <x-avatar class="h-6 w-6 lg:w-9 lg:h-9" />
-                        </div>
+                        </div> --}}
 
                     
 
@@ -64,8 +79,8 @@
                             'flex flex-wrap text-[15px] rounded-xl p-2.5 flex flex-col text-black bg-[#f6f6f8fb]',
                             'rounded-bl-none border border-gray-200/40' => !($message->sender_id === auth()->id()),
                             'rounded-br-none bg-blue-500/80 text-white ' => $message->sender_id === auth()->id(),
-                        ])>
-                            <p class="whitespace-normal truncate text-sm md:text-base tracking-wide lg:tracking-normal">
+                        ])  >
+                            <p class="whitespace-normal truncate text-sm md:text-base tracking-wide lg:tracking-normal" wire:poll.1000ms>
                                 {{ $message->body }}
                             </p>
 
