@@ -8,6 +8,9 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
             ],
+            build: {
+                outDir: 'public/build',
+            },
             refresh: true,
         }),
     ],
