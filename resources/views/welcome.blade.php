@@ -201,7 +201,7 @@
 
                     <h2 class="text-gray-800 text-2xl sm:text-3xl md:text-4xl   font-semibold font-serif ">Welcome To</h2>
             
-                    <h1 class="text-gray-800 text-4xl sm:text-5xl md:text-2xl font-bold mt-2 sm:mt-3 md:mt-4 mb-6 sm:mb-8 md:mb-10 font-serif"> Veritas Classmeet</h1><!--Add vuna logo and reduce font size-->
+                    <h1 class="text-gray-800 text-4xl sm:text-5xl md:text-2xl font-bold mt-2 sm:mt-3 md:mt-4 mb-6 sm:mb-8 md:mb-10 font-serif"> Muster Point</h1><!--Add vuna logo and reduce font size-->
                     
                     <div class="flex flex-row sm:flex-row justify-center p-5 gap-4 sm:gap-6 md:gap-8 pt-3">
                         <a href="{{route('login')}}" class="w-full sm:w-auto bg-gray-800  md:w-64 p-2 px-8 sm:p-3 rounded-lg text-white font-bold text-sm sm:text-base md:text-lg hover:bg-gray-700  focus:outline-none focus:ring-2 focus:ring-indigo-500    transition duration-300 ease-in-out">

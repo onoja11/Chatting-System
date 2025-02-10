@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function(){
     Route::post('stripe', [StripeController::class, 'stripe'])->name('stripe');
     Route::get('success', [StripeController::class, 'success'])->name('success');
     Route::get('cancel', [StripeController::class, 'cancel'])->name('cancel');
+    Route::get('/download/book/{id}', [StripeController::class, 'download'])->name('download.book');
 
 
 });

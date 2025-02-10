@@ -20,9 +20,12 @@
         <div class="mt-4">
             <x-input-label for="department" :value="__('Department')" />
             
-            <x-text-input id="department" class="block mt-1 w-full"
-            type="text"
-            name="department" />
+            <select type="text" name="department" id="department" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-full"  >
+                <option value="" hidden></option>
+            @foreach ($departments as $department)
+            <option value="{{ $department }} "> {{ $department }} </option>
+        @endforeach
+            </select>
             <x-input-error :messages="$errors->get('department')" class="mt-2" />
             </div>
 
@@ -40,9 +43,12 @@
         <div class="mt-4">
             <x-input-label for="level" :value="__('Level')" />
             
-            <x-text-input id="level" class="block mt-1 w-full"
-            type="number"
-            name="level" />
+            <select type="text" name="level" id="level" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-full"  >
+                <option value="" hidden></option>
+            @foreach ($levels as $level)
+            <option value="{{ $level }} "> {{ $level }} </option>
+        @endforeach
+            </select>
             <x-input-error :messages="$errors->get('level')" class="mt-2" />
             </div>
 

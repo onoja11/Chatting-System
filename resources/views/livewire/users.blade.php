@@ -1,5 +1,9 @@
 <div class="max-w-6xl mx-auto my-16">
-    <h1 class="text-center text-5xl font-bold dark:text-white text-black py-3 ">Users</h1>
+    @if (Auth::user()->role == "student")
+    <h1 class="text-center text-5xl font-bold dark:text-white text-black mb-8">CourseMates</h1>        
+    @else
+    <h1 class="text-center text-5xl font-bold dark:text-white text-black mb-8">Colleague</h1>        
+    @endif
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 px-2">
         @forelse ($users as $user)
@@ -26,7 +30,12 @@
             </div>
         </div>
         @empty
-        <h2 class="col-span-6 mt-24 text-center font-mono text-white">Your Course Mates Will be Displayed Here!</h2>  
+        @if (Auth::user()->role == "student")
+        <h2 class="col-span-6 mt-24 text-center font-mono text-white">Your Course Mates Will be Displayed Here!</h2>              
+        @else
+        <h2 class="col-span-6 mt-24 text-center font-mono text-white">Your Colleague Will be Displayed Here!</h2>              
+            
+        @endif
           
         @endforelse
     </div>

@@ -90,10 +90,10 @@
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
-                <x-danger-button class="ms-3 bg-indigo-700 hover:bg-indigo-600 focus:bg-indigo-800 active:bg-indigo-700 dark:focus:ring-indigo-500" wire:click.prevent="createUpload">
+                <x-success-button class="ms-3 bg-indigo-700 hover:bg-indigo-600 focus:bg-indigo-800 active:bg-indigo-700 dark:focus:ring-indigo-500" wire:click.prevent="createUpload">
                     Save
                     <span wire:loading class="w-8 h-8  border-4 border-dashed rounded-full animate-spin border-white"></span>
-                </x-danger-button>
+                </x-success-button>
             </div>
         </form>
     </x-modal>

@@ -22,7 +22,7 @@
         <header class="px-3 z-10 bg-white sticky top-0 w-full py-2">
             <div class="border-b justify-between flex items-center pb-2">
                 <div class="flex items-center gap-2">
-                    <h5 class="font-extrabold text-2xl">Classmeet</h5>
+                    <h5 class="font-extrabold text-2xl">Muster Point</h5>
                 </div>
             </div>
         </header>

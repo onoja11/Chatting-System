@@ -22,7 +22,7 @@
 >
     <div class="border-b flex flex-col overflow-y-scroll grow h-full">
         {{-- header --}}
-        <header class="w-full    sticky inset-x-0 flex pb-[5px] pt-[5px] top-0 z-10 bg-white border-b ">
+        <header class="w-full sticky inset-x-0 flex pb-[5px] pt-[5px] top-0 z-10 bg-white border-b ">
             <div class="flex w-full item-center px-2 lg:px-4 gap-2 md:gap-5">
                 <a class="shrink-0 lg:hidden" href="{{ route('classroom') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -39,6 +39,7 @@
                         {{ Str::upper($selectedConversation->course_title) }}
                     </h6>
                     <div class="absolute right-0 mr-2">
+                        @if (Auth::user()->role == 'staff')
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <x-secondary-button>
@@ -57,7 +58,8 @@
                                     <i class="fas fa-image mr-3"></i> upload image
                                 </x-dropdown-link>
                             </x-slot>
-                        </x-dropdown>
+                        </x-dropdown>                            
+                        @endif
                     </div>
                 </div>
             </div>
@@ -244,48 +246,17 @@
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
-                <x-danger-button class="ms-3 bg-indigo-700 hover:bg-indigo-600 focus:bg-indigo-800 active:bg-indigo-700 dark:focus:ring-indigo-500"  >
+                <x-success-button class="ms-3 bg-indigo-700 hover:bg-indigo-600 focus:bg-indigo-800 active:bg-indigo-700 dark:focus:ring-indigo-500"  >
                     Save
                     <span wire:loading class="w-8 h-8  border-4 border-dashed rounded-full animate-spin border-white"></span>
-                </x-danger-button>
+                </x-success-button>
             </div>
         </form>
     </x-modal>
     {{-- new file --}}
 
 
-    <!-- Image Upload Modal -->
-    <div
-        x-show="openImageModal"
-        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-        x-cloak
-    >
-        <div class="bg-white w-full max-w-md rounded-lg shadow-lg p-6">
-            <div class="flex justify-between items-center border-b pb-3">
-                <h2 class="text-xl font-semibold text-gray-800">Upload Image</h2>
-                <button @click="openImageModal = false" class="text-gray-500 hover:text-gray-800">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <form class="mt-4 space-y-4" wire:submit.prevent="imageUpload">
-                <div>
-                    <label for="image-upload" class="block text-sm font-medium text-gray-700">Choose Image</label>
-                    <input type="file" id="image-upload" accept="image/*" wire:model="image"
-                        class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" />
-                        @error('image') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
-                </div>
-                <div class="flex gap-2 justify-end">
-                        <x-primary-button @click="openImageModal = false">
-                            Cancel
-                        </x-primary-button>
-                        <button class="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-500 rounded-md font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800  transition ease-in-out duration-150" >
-                            Send
-                            <span wire:loading class="w-8 h-8 ml-2 border-4 border-dashed rounded-full animate-spin border-white"></span>
-                        </button>
-                </div>
-            </form>
-        </div>
-    </div>
+   
 
     {{-- new image --}}
     <x-modal name="upload-image" focusable>
@@ -321,10 +292,10 @@
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
-                <x-danger-button class="ms-3 bg-indigo-700 hover:bg-indigo-600 focus:bg-indigo-800 active:bg-indigo-700 dark:focus:ring-indigo-500"  >
+                <x-success-button class="ms-3 bg-indigo-700 hover:bg-indigo-600 focus:bg-indigo-800 active:bg-indigo-700 dark:focus:ring-indigo-500"  >
                     Save
                     <span wire:loading class="w-8 h-8  border-4 border-dashed rounded-full animate-spin border-white"></span>
-                </x-danger-button>
+                </x-success-button>
             </div>
         </form>
     </x-modal>
