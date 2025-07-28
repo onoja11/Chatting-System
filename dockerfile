@@ -29,6 +29,9 @@ WORKDIR /var/www
 # Copy application code
 COPY . .
 
+# Create SQLite database file
+RUN mkdir -p database && touch database/database.sqlite
+
 # Install PHP dependencies
 RUN composer install --optimize-autoloader --no-dev
 
