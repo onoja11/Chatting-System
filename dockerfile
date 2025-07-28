@@ -44,8 +44,8 @@ RUN php artisan config:cache \
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-# Expose port for PHP-FPM
-EXPOSE 9000
+# Expose port
+EXPOSE 8000
 
-# Start PHP-FPM
-CMD ["php-fpm"]
+# Automatically run key:generate and migrate before starting the app
+CMD  php artisan migrate && php artisan serve --host=0.0.0.0 --port=8000
