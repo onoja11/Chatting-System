@@ -5,31 +5,47 @@ FROM php:8.2-fpm
 RUN apt-get update && apt-get install -y \
     git \
     curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
     zip \
     unzip \
     sqlite3 \
     libsqlite3-dev \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev \
     && docker-php-ext-install pdo pdo_sqlite mbstring exif pcntl bcmath gd
 
 # Install Composer
 COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
 
+# Optional: Install Node.js and npm for Vite (Laravel asset building)
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g npm
+
 # Set working directory
 WORKDIR /var/www
 
-# Copy existing application
+# Copy application code
 COPY . .
 
 # Install PHP dependencies
 RUN composer install --optimize-autoloader --no-dev
 
-# Set proper permissions
+# Install JS dependencies and build assets (Vite)
+RUN npm install && npm run build
+
+# Laravel optimizations (for production)
+RUN php artisan config:cache \
+    && php artisan route:cache \
+    && php artisan view:cache
+
+# Set correct permissions
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-# Expose port 9000 and start php-fpm server
+# Expose port for PHP-FPM
 EXPOSE 9000
+
+# Start PHP-FPM
 CMD ["php-fpm"]
